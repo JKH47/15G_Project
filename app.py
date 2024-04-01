@@ -31,15 +31,14 @@ def create():
         cur = conn.cursor()
         cur.execute("INSERT INTO posts (title, content) VALUES (?, ?)", (title, content))
         conn.commit()
+        new_post_id = cur.lastrowid
         conn.close()
-        return redirect('/')
+        return redirect(f'/post/{new_post_id}')
     elif request.method == 'POST' and request.form['btn']=='0':
         return index()
     return render_template('create.html')
 
-
-
-@app.route('/post/<int:post_id>')
+@app.route('/post/<int:post_id>', methods=['GET', 'POST'])
 def post(post_id):
     conn = sqlite3.connect(DATABASE)
     cur = conn.cursor()
