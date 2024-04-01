@@ -20,7 +20,12 @@ def create_table():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    conn = sqlite3.connect(DATABASE)
+    cur = conn.cursor()
+    cur.execute("SELECT id, title, content FROM posts")
+    posts = cur.fetchall()
+    conn.close()
+    return render_template('index.html', posts = posts)
 
 @app.route('/create/', methods=['GET', 'POST'])
 def create():
