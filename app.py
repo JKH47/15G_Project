@@ -1,8 +1,10 @@
 from flask import Flask, request, redirect, render_template
 import sqlite3
-
+from datetime import datetime
 app = Flask(__name__)
 
+now = datetime.now()
+date = now.strftime('%Y-%m-%d %H:%M') 
 DATABASE = 'database.db'
 
 def create_table():
