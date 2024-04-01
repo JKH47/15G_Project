@@ -24,7 +24,7 @@ def index():
 
 @app.route('/create/', methods=['GET', 'POST'])
 def create():
-    if request.method == 'POST':
+    if request.method == 'GET':
         title = request.form['title']
         content = request.form['content']
         conn = sqlite3.connect(DATABASE)
