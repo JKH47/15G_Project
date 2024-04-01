@@ -12,7 +12,8 @@ def create_table():
         CREATE TABLE IF NOT EXISTS posts (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL,
-            content TEXT NOT NULL
+            content TEXT NOT NULL,
+            date TEXT NOT NULL
         )
     ''')
     conn.commit()
@@ -22,7 +23,7 @@ def create_table():
 def index():
     conn = sqlite3.connect(DATABASE)
     cur = conn.cursor()
-    cur.execute("SELECT id, title, content FROM posts")
+    cur.execute("SELECT id, title, date FROM posts")
     posts = cur.fetchall()
     conn.close()
     return render_template('index.html', posts = posts)
@@ -34,7 +35,7 @@ def create():
         content = request.form['content']
         conn = sqlite3.connect(DATABASE)
         cur = conn.cursor()
-        cur.execute("INSERT INTO posts (title, content) VALUES (?, ?)", (title, content))
+        cur.execute("INSERT INTO posts (title, content, date) VALUES (?, ?, ?)", (title, content, date))
         conn.commit()
         new_post_id = cur.lastrowid
         conn.close()
