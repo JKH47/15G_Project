@@ -55,6 +55,25 @@ def post(post_id):
     conn.close()
     return render_template('post.html', post=post)
 
+@app.route('/edit/<int:post_id>', methods=['GET', 'POST'])
+def edit(post_id):
+    if request.method == 'POST':
+        title = request.form['title']
+        content = request.form['content']
+        conn = sqlite3.connect(DATABASE)
+        cur = conn.cursor()
+        cur.execute("UPDATE posts SET title = ?, content = ? WHERE id = ?", (title, content, post_id))
+        conn.commit()
+        conn.close()
+        return redirect(f'/post/{post_id}')
+    else:
+        conn = sqlite3.connect(DATABASE)
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM posts WHERE id = ?", (post_id,))
+        post = cur.fetchone()
+        conn.close()
+        return render_template('edit.html', post=post)
+
 if __name__ == '__main__':
     create_table()
     app.run(debug=True)
