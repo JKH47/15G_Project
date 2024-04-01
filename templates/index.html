@@ -54,12 +54,16 @@
         <th>번호</th>
         <th>제목</th>
         <th>등록날짜</th>
+        <th>삭제하기</th>
     </tr>
     {% for post in posts %}
     <tr>
         <td>{{ post[0] }}</td>
         <td><a href="/post/{{ post[0] }}">{{ post[1] }}</a></td>
         <td>{{ post[2] }}</td>
+        <td> <form action="{{ url_for('delete', post_id=post[0]) }}" method="GET">
+            <button type="submit" class="btn btn-danger">삭제하기</button>
+        </form></td>
     </tr>
     {% endfor %}
 </table>
@@ -71,9 +75,7 @@
         </span>
     </form>
     <form action="{{ url_for('create') }}" method="GET">
-        <input type="submit" value="글쓰기">
+        <button type="submit" class="btn btn-primary">글쓰기</button>
     </form>
-    <input type="submit" value="삭제">
 </div>
-
 </html>

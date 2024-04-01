@@ -55,6 +55,15 @@ def post(post_id):
     conn.close()
     return render_template('post.html', post=post)
 
+@app.route('/delete/<int:post_id>', methods=['GET'])
+def delete(post_id):
+    conn = sqlite3.connect(DATABASE)
+    cur = conn.cursor()
+    cur.execute("DELETE FROM posts WHERE id=?", (post_id,))
+    conn.commit()
+    conn.close()
+    return index()
+
 if __name__ == '__main__':
     create_table()
     app.run(debug=True)
