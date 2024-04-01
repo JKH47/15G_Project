@@ -35,6 +35,15 @@ def create():
         return redirect('/')
     return render_template('create.html')
 
+@app.route('/post/<int:post_id>')
+def post(post_id):
+    conn = sqlite3.connect(DATABASE)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM posts WHERE id = ?", (post_id,))
+    post = cur.fetchone()
+    conn.close()
+    return render_template('post.html', post=post)
+
 if __name__ == '__main__':
     create_table()
     app.run(debug=True)
