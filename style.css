@@ -40,7 +40,7 @@ body {
 }
 
 .card-header h1 {
-    font-size: 30px;
+    font-size: 40px;
     font-weight: 600;
 }
 
@@ -83,7 +83,7 @@ body {
 }
 
 .card-body .title {
-    width: 70%;
+    width: 50%;
     text-align: left;
 }
 
@@ -139,6 +139,77 @@ body {
 .btn a {
     padding: 10px;
     background-color: rgb(83, 71, 255);
+    color: #fff;
+    border-radius: 10px;
+}
+
+
+/* post2의 css 구역*/
+
+.card-header1 h1 {
+    padding: 20px;
+    text-align: center;
+    margin: 10px 10px 10px 10px;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.card-write {
+    padding: 20px;
+}
+
+.card-write input, textarea{
+    margin-left: 10px;
+    padding: 10px;
+    border: 1px solid #999;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px #e6e6e6;
+}
+
+.card-write .myinfo input[type="text"] {
+    width: 26%;
+    margin-right: 30px;
+}
+.card-write .myinfo input[type="password"] {
+    width: 26%;
+    margin-right: 30px;
+}
+
+.card-write .title-w input[type="text"] {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 85.5%;
+}
+
+.card-write .msg textarea {
+    min-width: 85.5%;
+    max-width: 85.5%;
+    min-height: 200px;
+    max-height: 200px;
+    box-shadow: inset 3px 3px 10px #e6e6e6;
+
+    /* vertical-align: 텍스트를 수직, 수평 정렬 할 수 있다. */
+    vertical-align: top;
+}
+
+.card-write input[type="file"] {
+    border: none;
+    box-shadow: none;
+    padding: 10px;
+    margin-left: 40px;
+}
+
+.btn-w {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 10px 10px 20px 10px;
+    padding: 10px;
+}
+
+.btn-w a {
+    background-color: rgb(83, 71, 255);
+    padding: 10px;
     color: #fff;
     border-radius: 10px;
 }
