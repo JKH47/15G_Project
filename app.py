@@ -36,7 +36,7 @@ def create():
         return redirect(f'/post/{new_post_id}')
     return render_template('create.html')
 
-@app.route('/post/<int:post_id>', methods=['GET', 'POST'])
+@app.route('/post/<int:post_id>', methods=['GET'])
 def post(post_id):
     conn = sqlite3.connect(DATABASE)
     cur = conn.cursor()
