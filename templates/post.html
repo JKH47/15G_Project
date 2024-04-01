@@ -8,10 +8,15 @@
 <body>
     <h1>제목 : {{ post[1] }}</h1>
     <p>내용 : {{ post[2] }}</p>
-    <form action="/" method="GET">
-    <button type="submit">홈으로</button>
 
     <form action="/edit/{{ post[0] }}" method="GET">
         <button type="submit">수정하기</button>
+    </form>
+    
+    <form action="/" method="GET">
+    <button type="submit">홈으로</button>
+    </form>
+
+
 </body>
 </html>
