@@ -55,12 +55,19 @@
             <th>번호</th>
             <th>제목</th>
             <th>등록날짜</th>
+            <th>게시글 확인</th>
         </tr>
         {% for post in posts %}
         <tr>
             <td>{{ post[0] }}</td>
             <td>{{ post[1] }}</td>
             <td>{{ post[2] }}</td>
+            <td>
+                <form action="{{ url_for('post', post_id=post[0]) }}" method="GET">
+                    <button type="submit" class="btn btn-primary">내용 확인하기</button>
+                </form>
+            </td>
+            
         </tr>
         {% endfor %}
     </table>
