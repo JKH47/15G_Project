@@ -1,25 +1,12 @@
 from flask import Flask, request, redirect, render_template
 import sqlite3
+from models import create_table_posts,create_table_users
 from datetime import datetime
 app = Flask(__name__)
 
 now = datetime.now()
 date = now.strftime('%Y-%m-%d %H:%M') 
 DATABASE = 'database.db'
-
-def create_table():
-    conn = sqlite3.connect(DATABASE)
-    cur = conn.cursor()
-    cur.execute('''
-        CREATE TABLE IF NOT EXISTS posts (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title TEXT NOT NULL,
-            content TEXT NOT NULL,
-            date TEXT NOT NULL
-        )
-    ''')
-    conn.commit()
-    conn.close()
 
 @app.route('/')
 def index():
@@ -83,6 +70,24 @@ def delete(post_id):
     conn.close()
     return index()
 
+def create_user(username, password):
+    conn = sqlite3.connect(DATABASE)
+    cur = conn.cursor()
+    cur.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
+    conn.commit()
+    conn.close()
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        create_user(username, password)
+        return redirect('/login')
+    return render_template('signup.html')
+
+
 if __name__ == '__main__':
-    create_table()
+    create_table_posts()
+    create_table_users()
     app.run(debug=True)
