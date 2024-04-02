@@ -70,19 +70,16 @@ def delete(post_id):
     conn.close()
     return index()
 
-def create_user(username, password):
-    conn = sqlite3.connect(DATABASE)
-    cur = conn.cursor()
-    cur.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
-    conn.commit()
-    conn.close()
-
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        create_user(username, password)
+        conn = sqlite3.connect(DATABASE)
+        cur = conn.cursor()
+        cur.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
+        conn.commit()
+        conn.close()
         return redirect('/login')
     return render_template('signup.html')
 
